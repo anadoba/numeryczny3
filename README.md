@@ -1,4 +1,4 @@
 Algorytmy numeryczne
 ===========
 
-Projekt numer 2 - zagadnienie ró¿niczkowe. 
+Projekt numer 3 - zaagadnienie ró¿niczkowe. 
