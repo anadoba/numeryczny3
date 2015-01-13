@@ -1,0 +1,6 @@
+## Debug files
+*/[Bb]in/
+*/[Oo]bj/
+
+## User pref
+*.suo
