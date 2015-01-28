@@ -60,6 +60,14 @@ namespace ZagadnienieRozniczkowe
             Console.WriteLine("x[{0}] = {1}\ty[{0}] = {2}", iteracja, _x[iteracja], _y[iteracja]);
         }
 
+        static void MetodaHeuna(int iteracja)
+        {
+            _x[iteracja] = 1 + iteracja * _h;
+            _y[iteracja + 1] = _y[iteracja] + _h / 2 * (F(_x[iteracja], _y[iteracja]) + F(_x[iteracja] + _h, _y[iteracja] + _h * F(_x[iteracja], _y[iteracja])));
+
+            Console.WriteLine("x[{0}] = {1}\ty[{0}] = {2}", iteracja, _x[iteracja], _y[iteracja]);
+        }
+
         static double F(double a, double b)
         {
             return Math.Sqrt(b - a) + a + 1;
