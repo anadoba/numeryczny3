@@ -26,7 +26,8 @@ namespace ZagadnienieRozniczkowe
             Console.WriteLine("\n\n-----------------------------\n-----\t METODA EULERA \t-----\n-----------------------------");
             Console.WriteLine(ObliczWynik() + "\n");
 
-
+            Console.WriteLine("\n\n-----------------------------\n---\t ZMOD. METODA EULERA \t---\n-----------------------------");
+            Console.WriteLine(ObliczWynikZmodyfikowanegoEulera() + "\n");
             Console.ReadLine();
         }
 
@@ -60,7 +61,7 @@ namespace ZagadnienieRozniczkowe
             Console.WriteLine("x[{0}] = {1}\ty[{0}] = {2}", iteracja, _x[iteracja], _y[iteracja]);
         }
 
-        static void MetodaHeuna(int iteracja)
+        static void ZmodyfikowanaMetodaEulera(int iteracja)
         {
             _x[iteracja] = 1 + iteracja * _h;
             _y[iteracja + 1] = _y[iteracja] + _h / 2 * (F(_x[iteracja], _y[iteracja]) + F(_x[iteracja] + _h, _y[iteracja] + _h * F(_x[iteracja], _y[iteracja])));
@@ -86,6 +87,22 @@ namespace ZagadnienieRozniczkowe
             for (k= 0; k <= _a; k++)
             {
                 MetodaEulera(k);
+            }
+
+            k--;
+
+            double wynik = _y[k] - RozwiazanieDokladne(_x[k]);
+            Console.Write("\n| y[{0}] - y(x[{0}]) | = ", k);
+            return Math.Abs(wynik);
+        }
+
+        static double ObliczWynikZmodyfikowanegoEulera()
+        {
+            int k;
+
+            for (k = 0; k <= _a; k++)
+            {
+                ZmodyfikowanaMetodaEulera(k);
             }
 
             k--;
