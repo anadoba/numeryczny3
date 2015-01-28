@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -99,34 +101,36 @@ namespace ZagadnienieRozniczkowe
         static double ObliczWynik()
         {
             int k;
-
+            double[] wynik = new double[1000];
             for (k= 0; k <= _n; k++)
             {
                 MetodaEulera(k, _n/10);
+                wynik[k] = Math.Abs(_y[k] - RozwiazanieDokladne(_x[k]));
             }
 
             k--;
 
-            double wynik = _y[k] - RozwiazanieDokladne(_x[k]);
-            Console.Write("\n| y[{0}] - y(x[{0}]) | = ", k);
-            return Math.Abs(wynik);
+            var maxWynik = wynik.Max();
+            Console.Write("\nmaksymalny | y[] - y(x[]) | = ", maxWynik);
+            return maxWynik;
         }
 
         static double ObliczWynikZmodyfikowanegoEulera()
         {
             _coKtory = 0;
             int k;
-
+            double[] wynik = new double[1000];
             for (k = 0; k <= _n; k++)
             {
                 ZmodyfikowanaMetodaEulera(k, _n/10);
+               wynik[k] = Math.Abs(_y[k] - RozwiazanieDokladne(_x[k]));
             }
 
             k--;
 
-            double wynik = _y[k] - RozwiazanieDokladne(_x[k]);
-            Console.Write("\n| y[{0}] - y(x[{0}]) | = ", k);
-            return Math.Abs(wynik);
+            var maxWynik = wynik.Max();
+            Console.Write("\nmaksymalny | y[] - y(x[]) | = ", maxWynik);
+            return maxWynik;
         }
     }
 }
